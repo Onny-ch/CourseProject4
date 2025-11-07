@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}Получатели{% endblock %}
+
+{% block content %}
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Получатели</h1>
+    <a class="btn btn-primary" href="{% url 'mailings:recipient_create' %}">Добавить</a>
+  </div>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Email</th>
+        <th>Имя</th>
+        <th>Комментарий</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for recipient in recipients %}
+        <tr>
+          <td>{{ recipient.email }}</td>
+          <td>{{ recipient.full_name }}</td>
+          <td>{{ recipient.comment }}</td>
+          <td class="text-end">
+            <a class="btn btn-sm btn-secondary" href="{% url 'mailings:recipient_update' recipient.pk %}">Изменить</a>
+            <a class="btn btn-sm btn-danger" href="{% url 'mailings:recipient_delete' recipient.pk %}">Удалить</a>
+          </td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="4">Получатели не найдены.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
+

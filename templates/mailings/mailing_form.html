@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Рассылка{% endblock %}
+
+{% block content %}
+  <h1>{% if form.instance.pk %}Изменение{% else %}Создание{% endif %} рассылки</h1>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-success" type="submit">Сохранить</button>
+    <a class="btn btn-link" href="{% url 'mailings:mailing_list' %}">Отмена</a>
+  </form>
+{% endblock %}
+
