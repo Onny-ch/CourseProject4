@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Главная{% endblock %}
+
+{% block content %}
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card text-bg-primary mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Всего рассылок</h5>
+          <p class="card-text display-6">{{ total_mailings }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-bg-success mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Активные рассылки</h5>
+          <p class="card-text display-6">{{ active_mailings }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-bg-info mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Уникальных получателей</h5>
+          <p class="card-text display-6">{{ unique_recipients }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% if user.is_authenticated %}
+    <div class="mt-4">
+      <h2>Быстрые действия</h2>
+      <div class="list-group">
+        <a class="list-group-item list-group-item-action" href="{% url 'mailings:recipient_create' %}">Добавить получателя</a>
+        <a class="list-group-item list-group-item-action" href="{% url 'mailings:message_create' %}">Создать сообщение</a>
+        <a class="list-group-item list-group-item-action" href="{% url 'mailings:mailing_create' %}">Создать рассылку</a>
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}
+

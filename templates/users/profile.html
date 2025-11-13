@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}Профиль{% endblock %}
+
+{% block content %}
+  <h1>Профиль</h1>
+  <div class="card" style="max-width: 480px;">
+    <div class="card-body">
+      {% if user.avatar %}
+        <img src="{{ user.avatar.url }}" class="img-thumbnail mb-3" alt="Аватар" />
+      {% endif %}
+      <p><strong>Email:</strong> {{ user.email }}</p>
+      <p><strong>Имя:</strong> {{ user.first_name }}</p>
+      <p><strong>Фамилия:</strong> {{ user.last_name }}</p>
+      <p><strong>Телефон:</strong> {{ user.phone }}</p>
+      <p><strong>Страна:</strong> {{ user.country }}</p>
+      <a class="btn btn-primary" href="{% url 'users:profile_edit' %}">Редактировать</a>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col-md-4">
+      <div class="card text-bg-primary mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Рассылок</h5>
+          <p class="card-text display-6">{{ mailings_count }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-bg-secondary mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Сообщений</h5>
+          <p class="card-text display-6">{{ messages_count }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-bg-info mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Получателей</h5>
+          <p class="card-text display-6">{{ recipients_count }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card text-bg-success mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Успешные попытки</h5>
+          <p class="card-text display-6">{{ attempts_success }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-bg-danger mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Неудачные попытки</h5>
+          <p class="card-text display-6">{{ attempts_failed }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-bg-dark mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Всего попыток</h5>
+          <p class="card-text display-6">{{ attempts_total }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
